@@ -80,7 +80,7 @@ function CharacterStats(stats) {
     language: 'Common Tongue',
   });
 
-  const swordsman = new Humanoid({
+  const swordsman = new Villian({
     createdAt: new Date(),
     dimensions: {
       length: 2,
@@ -114,16 +114,16 @@ function CharacterStats(stats) {
     language: 'Elvish',
   });
 
-  console.log(mage.createdAt); // Today's date
-  console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
-  console.log(swordsman.healthPoints); // 15
-  console.log(mage.name); // Bruce
-  console.log(swordsman.team); // The Round Table
-  console.log(mage.weapons); // Staff of Shamalama
-  console.log(archer.language); // Elvish
-  console.log(archer.greet()); // Lilith offers a greeting in Elvish.
-  console.log(mage.takeDamage()); // Bruce took damage.
-  console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+  // console.log(mage.createdAt); // Today's date
+  // console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
+  // console.log(swordsman.healthPoints); // 15
+  // console.log(mage.name); // Bruce
+  // console.log(swordsman.team); // The Round Table
+  // console.log(mage.weapons); // Staff of Shamalama
+  // console.log(archer.language); // Elvish
+  // console.log(archer.greet()); // Lilith offers a greeting in Elvish.
+  // console.log(mage.takeDamage()); // Bruce took damage.
+  // console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
 function hero(info) {
   Humanoid.call(this, info);
@@ -131,7 +131,7 @@ function hero(info) {
     return `${this.name} is attacking with the help of the gods!`
   }
 }
-console.log(archer.divine());
+// console.log(archer.divine());
 
 function Villian(info) {
   Humanoid.call(this, info);
@@ -139,8 +139,30 @@ function Villian(info) {
     return `${this.name} has spawned minions to help attack!`
   }
 }
-console.log(mage.minion());
+// console.log(mage.minion());
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+function fight(cpu1, cpu2) {
+  while (cpu1.healthPoints > 0 || cpu2.healthPoints > 0) {
+    if ((Math.floor(Math.random() * 100) +1) >= 50) {
+      console.log(cpu2.divine());
+      cpu1.healthPoints -= 2;
+      console.log(cpu1.takeDamage());
+      if (cpu1.healthPoints <= 0 ) {
+        console.log(cpu1.destroy());
+        break;
+      }
+    } else {
+      console.log(cpu1.minion());
+      cpu2.healthPoints -= 2;
+      console.log(cpu2.takeDamage());
+      if (cpu2.healthPoints <= 0) {
+        console.log(cpu2.destroy());
+        break;
+      } 
+    }
+  }
+}
+fight(swordsman, archer);
