@@ -64,7 +64,7 @@ function CharacterStats(stats) {
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
 
-  const mage = new Humanoid({
+  const mage = new Villian({
     createdAt: new Date(),
     dimensions: {
       length: 2,
@@ -97,7 +97,7 @@ function CharacterStats(stats) {
     language: 'Common Tongue',
   });
 
-  const archer = new Humanoid({
+  const archer = new hero({
     createdAt: new Date(),
     dimensions: {
       length: 1,
@@ -125,7 +125,21 @@ function CharacterStats(stats) {
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
+function hero(info) {
+  Humanoid.call(this, info);
+  this.divine = function() {
+    return `${this.name} is attacking with the help of the gods!`
+  }
+}
+console.log(archer.divine());
 
+function Villian(info) {
+  Humanoid.call(this, info);
+  this.minion = function() {
+    return `${this.name} has spawned minions to help attack!`
+  }
+}
+console.log(mage.minion());
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
